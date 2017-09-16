@@ -1,0 +1,162 @@
+<style type="text/css">
+    element.style {
+        margin: 0px;
+    }
+    
+    .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: auto !important;
+        z-index: 1000;
+        display: none;
+        float: left;
+        min-width: 13rem !important;
+        padding: .5rem 0;
+        margin: .125rem 0 0;
+        font-size: 1rem;
+        color: #292b2c;
+        text-align: center;
+        list-style: none;
+        background-color: #fff;
+        -webkit-background-clip: padding-box;
+        background-clip: padding-box;
+        border: 1px solid rgba(0, 0, 0, .15);
+        border-radius: .25rem;
+    }
+    
+    .Qbox {
+        display: block;
+        min-height: 500px;
+        margin: 0px auto;
+        padding: 10%;
+        width: 100%;
+        border: 2px solid #464a4c !important;
+        border-radius: 10px;
+        background-color: #ddd !important;
+        text-align: center;
+        padding: 10px;
+        /* opacity: 0.6; */
+    }
+    
+    .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: auto !important;
+        z-index: 1000;
+        display: none;
+        float: left;
+        min-width: 13rem !important;
+        padding: .5rem 0;
+        margin: .125rem 0 0;
+        font-size: 1rem;
+        color: #292b2c;
+        text-align: center;
+        list-style: none;
+        background-color: #636c72 !important;
+        -webkit-background-clip: padding-box;
+        background-clip: padding-box;
+        border: 1px solid rgba(0, 0, 0, .15);
+        border-radius: .25rem;
+    }
+
+</style>
+
+<div ng-controller="createCtrl as create">
+    <nav class="navbar fixed-top navbar-toggleable-md navbar-inverse bg-inverse">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarExample" aria-controls="navbarExample" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="container">
+            <a class="navbar-brand" href=""><i class="fa fa-ticket" aria-hidden="true"></i> Login App - DashBoard</a>
+            <div class="collapse navbar-collapse pull-right" id="navbarExample">
+            </div>
+        </div>
+    </nav>
+
+    <br/>
+
+    <section class="Qbox text-center" ng-init="create.logRecords()">
+        <h4>User Details:</h4>
+        <h5>ID : {{create.userId}} | User Type : {{create.userType}}</h5>
+        <h5>Name : {{create.user}} | Email : {{create.email}}</h5>
+        <h5>Mobile Number : {{create.contact}} | Address : {{create.address}}</h5>
+        <hr>
+
+        <div ng-if="create.userType == 'employee'">
+            <!--Log Records start  -->
+            <h4>: Log details of User :</h4>
+            <hr>
+            <div ng-if="create.logrecord.length == 0">
+                <div class="center-block">
+                    <div>
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h4>No Logs Recorded Yet...</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+            <div ng-if="create.logrecord.length > 0" ng-repeat="record in create.logrecord | limitTo: -5 | orderBy:'time':true" ">
+  <div class="center-block ">
+    <div >
+      <div class = "panel panel-primary ">
+        <div class = "panel-heading ">
+          logged on <span style="color:blue ">{{record | date: "MMM dd,y "}} </span><br/>
+           Time : {{record | date:'HH:mm:ss'}}
+        </div>                    
+        </div>
+    </div>
+    <hr>
+    </div>
+  </div>
+
+        <button class="btn btn-success "><a Style="color:white; "  data-toggle="modal" data-target="#sendmessageModal" href=""><i class="fa fa-envelope " aria-hidden="true "></i> Send Message! </a></button>              
+  </div>
+
+
+
+<!-- Modal For creating messages -->
+    <div class="modal fade" id="sendmessageModal">
+      <div class="modal-dialog" style="left:0px; ">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button class="close" data-dismiss="modal">&times;</button>
+            <h4 class="center" class="modal-title" style="color:#000; ">: Create Message :</h4>
+          </div>
+          <div class="modal-body">
+                        <form role="form" method="post" ng-submit="create.submitMessage(create.userId)">
+                            <div class="form-group ">
+                                <textarea type="text " class="form-control " placeholder="Write Message... " name="message " ng-model="create.message " required = "true "></textarea>
+                            </div>
+                            <button type="submit " name="submit " class="w3-btn w3-hover-green w3-border w3-border-green w3-round-large ">&nbsp;&nbsp;Send Message!&nbsp;&nbsp;</button> &nbsp;
+                        </form>
+        </div>
+        </div>
+      </div>
+    </div>
+    <!-- End of modal -->
+
+<br/>
+<!-- Footer -->
+    <footer class="py-2 bg-inverse " >
+        <div class="container ">
+            <p class="m-0 text-center text-white ">Copyright &copy; Login App | All Rights Reserved.</p>
+            <p Class="m-0 text-center text-white ">Created By- Sanjay Kumar Mahto</p>
+        </div>
+        <br/>
+        <div class="col-lg-12 ">
+                    <h3 align="center " style="color: white; ">Connect With Me:</h3>
+                    <div align="center " class="footer-social ">
+                        <a href="https://www.facebook.com/sanjay.mahto.9461 "><i class="fa fa-facebook fa-2x "></i></a>
+                        &nbsp;&nbsp;
+                        <a href="https://twitter.com/MahtoSa "><i class="fa fa-twitter fa-2x "></i></a>
+                        &nbsp;&nbsp;
+                        <a href="https://www.instagram.com/kuma7609/ "><i class="fa fa-instagram fa-2x "></i></a>
+                       &nbsp;&nbsp;
+                       <a href="https://github.com/sanjaymahto " target="_blank "><i class="fa fa-github fa-fw fa-2x "></i></a>
+                       &nbsp;&nbsp;
+                        <a href="https://www.linkedin.com/in/sanjay-kumar-a9359785/ "><i class="fa fa-linkedin fa-2x "></i></a>
+                    </div>
+    </footer>
